@@ -5,6 +5,9 @@ import static tonikk.rubik.Element.of;
 
 /*
  * It's simple version of 2x2x2 cube with only 3 colors to start with
+ * TODO: Maybe unite pos and slots in one class
+ * TODO: Implement moves
+ * TODO: Write a parser to give initial state as a string/number
  */
 public class Cube {
     private int[] stickers = {

@@ -1,5 +1,19 @@
 package tonikk.rubik;
 
+/*
+  Element in 2x2x2 cube is a corner element.
+
+  TODO: Check whether the same class can be later used for edges
+
+  1. Type is integer now, it represents (for this 2x2x2 cube) one of 2 types of corners.
+  Colors are the same, the difference is only in color order.
+  2. Type can also represent orientation. But it has positive and negative impacts.
+  Positive is we have only one cube parameter instead of two
+  Negative is we have more complicated move tables.
+
+
+ */
+
 public class Element {
     private int type;
     private int orientation;
@@ -51,9 +65,7 @@ public class Element {
         return orientation * 2 + type + "";
     }
     public int color(int x) {
-        int color = 6;
-        color += (2 * type - 1) * (x - orientation);
-        return color % 3;
+        return (6 + (2 * type - 1) * (x - orientation)) % 3;
     }
 
 }
