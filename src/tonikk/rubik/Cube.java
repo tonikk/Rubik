@@ -1,9 +1,7 @@
 package tonikk.rubik;
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.IntFunction;
+import java.util.function.*;
 
-import static java.util.function.IntUnaryOperator.identity;
 import static java.util.stream.Collectors.*;
 
 import static tonikk.rubik.Element.of;
@@ -73,13 +71,11 @@ public class Cube {
                 .map(c -> c - '0')
                 .limit(24)
                 .toArray();
-        if (tmp.length != 24) {
-            throw new IllegalArgumentException("Wrong number of stickers");
-        }
         Map<Integer,Long> map = Arrays.stream(tmp)
                 .boxed()
                 .collect(groupingBy(Function.identity(),counting()));
-        if ((map.get(0) != 8) || (map.get(1) != 8) || (map.get(2) != 8)) {
+
+        if (tmp.length != 24 || map.get(0) != 8 || map.get(1) != 8 || map.get(2) != 8) {
             throw new IllegalArgumentException("Wrong number of stickers");
         }
         stickers = tmp;
@@ -93,7 +89,7 @@ public class Cube {
         c.stickers2slots();
         System.out.println(Arrays.deepToString(c.slots));
         c.slots2stickers();
-        c.parseStickers("010110102222010110102222");
+        c.parseStickers("0101_1010_2222_0101_1010_2222");
         System.out.println(Arrays.toString(c.stickers));
 
 
