@@ -33,8 +33,16 @@ public class Cube {
     };
 
     private Element[] slots = {
-            of(0), of(5), of(5), of(0),     // ULB DRB URF DLF
-            of(1), of(2), of(2), of(1)};    // DBL UBR DFR UFL
+            of(0), of(0), of(0), of(0),     // ULB DRB URF DLF
+            of(1), of(1), of(1), of(1)};    // DBL UBR DFR UFL
+
+    public Cube(String st) {
+        parseStickers(st);
+    }
+
+    public Cube() {
+        this("0000_1111_2222_0000_1111_2222");
+    }
 
     private static Map<Integer, Integer> perm2pos = new TreeMap<>();  // (94);
     private static List<Integer> pos2perm = new ArrayList<>(70);
@@ -59,6 +67,75 @@ public class Cube {
                 stickers[pos[i][j]] = e.color(j);
             }
         }
+    }
+
+    public void applyMove(int m, int n) {
+        Element tmp;
+        for (int i = 0; i < n % 4; i++) {
+            switch (m) {
+                case 0:
+                    tmp = slots[0];
+                    slots[0] = slots[7];
+                    slots[7] = slots[2];
+                    slots[2] = slots[5];
+                    slots[5] = tmp;
+                    break;
+                case 1:
+                    tmp = slots[7];
+                    slots[7] = slots[3];
+                    slots[3] = slots[6];
+                    slots[6] = slots[2];
+                    slots[2] = tmp;
+                    slots[7].twist(-1);
+                    slots[3].twist(1);
+                    slots[6].twist(-1);
+                    slots[2].twist(1);
+                    break;
+                case 2:
+                    tmp = slots[5];
+                    slots[5] = slots[2];
+                    slots[2] = slots[6];
+                    slots[6] = slots[1];
+                    slots[1] = tmp;
+                    slots[5].twist(1);
+                    slots[2].twist(-1);
+                    slots[6].twist(1);
+                    slots[1].twist(-1);
+                    break;
+                case 3:
+                    tmp = slots[4];
+                    slots[4] = slots[3];
+                    slots[3] = slots[6];
+                    slots[6] = slots[1];
+                    slots[1] = tmp;
+                    break;
+                case 4:
+                    tmp = slots[0];
+                    slots[0] = slots[5];
+                    slots[5] = slots[1];
+                    slots[1] = slots[4];
+                    slots[4] = tmp;
+                    slots[0].twist(1);
+                    slots[5].twist(-1);
+                    slots[1].twist(1);
+                    slots[4].twist(-1);
+                    break;
+                case 5:
+                    tmp = slots[0];
+                    slots[0] = slots[4];
+                    slots[4] = slots[3];
+                    slots[3] = slots[7];
+                    slots[7] = tmp;
+                    slots[0].twist(-1);
+                    slots[4].twist(1);
+                    slots[3].twist(-1);
+                    slots[7].twist(1);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unknown move");
+            }
+        }
+        slots2stickers();
     }
 
     public int[] stickers() {
