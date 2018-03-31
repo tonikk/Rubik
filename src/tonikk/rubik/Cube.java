@@ -11,11 +11,11 @@ import static tonikk.rubik.Element.of;
  */
 public class Cube {
     private int[] stickers = {
-            0, 1, 0, 1,   // U
-            1, 0, 1, 0,   // F
+            0, 0, 0, 0,   // U
+            1, 1, 1, 1,   // F
             2, 2, 2, 2,   // R
-            0, 1, 0, 1,   // D
-            0, 1, 0, 1,   // B
+            0, 0, 0, 0,   // D
+            1, 1, 1, 1,   // B
             2, 2, 2, 2    // L
     };
     private int[][] pos = {
@@ -30,8 +30,8 @@ public class Cube {
     };
 
     private Element[] slots = {
-            of(0), of(0), of(0), of(0),     // ULB DRB URF DLF
-            of(1), of(1), of(1), of(1)};    // DBL UBR DFR UFL
+            of(0), of(5), of(5), of(0),     // ULB DRB URF DLF
+            of(1), of(2), of(2), of(1)};    // DBL UBR DFR UFL
 
     private static Map<Integer, Integer> perm2pos = new TreeMap<>();  // (94);
     private static List<Integer> pos2perm = new ArrayList<>(70);
